@@ -29,6 +29,15 @@
   .tablet { --w: 820; --h: 1180; --s: .5; --pad: 14px; --rad: 30px; }
   .desk { --w: 1440; --h: 900; --s: .5; --pad: 10px; --rad: 14px; }
   [hidden] { display: none !important; }
+  /* Sur un téléphone, les cadres rapetissent pour tenir dans l'écran */
+  @media (max-width: 480px) {
+    header { padding: 24px 16px 4px; }
+    .tabs { flex-wrap: wrap; }
+    .stage { padding: 24px 16px 48px; gap: 32px; }
+    .phone { --s: .7; }
+    .tablet { --s: .38; }
+    .desk { --s: .22; }
+  }
 </style>
 </head>
 <body>
