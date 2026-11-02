@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Device preview — Décarie</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #EEF0F5; --ink: #161B3D; --slate: #4A5A7A; --frame: #1A1D2B; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.5 "Source Sans 3", system-ui, sans-serif; }
+  header { padding: 32px 24px 8px; max-width: 1600px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; }
+  h1 { font: 800 1.8rem/1.1 "Archivo", sans-serif; margin: 0 0 4px; letter-spacing: -.02em; }
+  header p { margin: 0; color: var(--slate); }
+  .tabs { display: flex; gap: 6px; background: #fff; padding: 4px; border-radius: 999px; border: 1px solid #DCE0E8; }
+  .tabs button { font: 600 .92rem/1 inherit; font-family: inherit; border: 0; background: none; padding: 10px 16px; border-radius: 999px; cursor: pointer; color: var(--slate); }
+  .tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .stage { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px; padding: 32px 24px 64px; max-width: 1600px; margin: 0 auto; }
+  .device { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .device figcaption { font: 700 .95rem/1.2 "Archivo", sans-serif; text-align: center; }
+  .device figcaption small { display: block; font: 400 .85rem/1.4 "Source Sans 3", sans-serif; color: var(--slate); }
+  .shell { background: var(--frame); padding: var(--pad); border-radius: var(--rad); box-shadow: 0 30px 60px -30px rgb(22 27 61 / .5); }
+  .screen { width: calc(var(--w) * var(--s) * 1px); height: calc(var(--h) * var(--s) * 1px); overflow: hidden; border-radius: calc(var(--rad) - var(--pad)); background: #fff; }
+  .screen iframe { width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); border: 0; transform: scale(var(--s)); transform-origin: 0 0; display: block; }
+  .phone { --w: 390; --h: 844; --s: .72; --pad: 10px; --rad: 44px; }
+  .tablet { --w: 820; --h: 1180; --s: .5; --pad: 14px; --rad: 30px; }
+  .desk { --w: 1440; --h: 900; --s: .5; --pad: 10px; --rad: 14px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Plomberie Décarie — device preview</h1>
+    <p>One page, designed mobile-first. Each screen is live: scroll inside it. Use the FR button to switch to French.</p>
+  </div>
+  <div class="tabs" role="group" aria-label="Filter devices">
+    <button type="button" data-show="all" aria-pressed="true">All</button>
+    <button type="button" data-show="phone">Phone</button>
+    <button type="button" data-show="tablet">Tablet</button>
+    <button type="button" data-show="desk">Desktop</button>
+  </div>
+</header>
+<main class="stage">
+  <figure class="device" data-kind="phone"><div class="shell phone"><div class="screen"><iframe src="decarie-plomberie-landing-en.html" title="Phone preview" loading="lazy"></iframe></div></div><figcaption>Phone<small>390 × 844</small></figcaption></figure>
+  <figure class="device" data-kind="tablet"><div class="shell tablet"><div class="screen"><iframe src="decarie-plomberie-landing-en.html" title="Tablet preview" loading="lazy"></iframe></div></div><figcaption>Tablet<small>820 × 1180</small></figcaption></figure>
+  <figure class="device" data-kind="desk"><div class="shell desk"><div class="screen"><iframe src="decarie-plomberie-landing-en.html" title="Desktop preview" loading="lazy"></iframe></div></div><figcaption>Desktop<small>1440 × 900</small></figcaption></figure>
+</main>
+<script>
+  const btns = document.querySelectorAll('.tabs button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.device').forEach(d => d.hidden = b.dataset.show !== 'all' && d.dataset.kind !== b.dataset.show);
+  }));
+</script>
+</body>
+</html>
